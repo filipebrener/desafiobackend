@@ -13,27 +13,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "site")
-public class Site {
+public class Blog {
 
     @Id
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Autor autor;
-
     @Column(name = "version")
     private Integer version;
 
     @Column(name = "ativo")
-    private Integer ativo;
+    private Boolean ativo;
 
     @Column(name = "endereco")
     private String endereco;
-
-    @Column(name = "nome")
-    private String nome;
 
     @Column(name = "rss")
     private String rss;
@@ -49,4 +42,11 @@ public class Site {
 
     @Column(name = "posts_dia")
     private Integer postsDia;
+
+    @Column(name = "nome")
+    private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    private Autor autor;
 }

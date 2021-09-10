@@ -12,18 +12,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "blog_post")
-public class BlogPost {
+public class BlogPost implements Comparable<BlogPost> {
 
     @Id
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "site_id")
-    private Site site;
+    @Column(name = "titulo")
+    private String titulo;
 
-    @Column(name = "version")
-    private Integer version;
+    @Column(name = "resumo")
+    private String resumo;
 
     @Column(name = "cliques")
     private Integer cliques;
@@ -34,26 +33,11 @@ public class BlogPost {
     @Column(name = "data_publicacao")
     private LocalDate dataPublicacao;
 
-    @Column(name = "resumo")
-    private String resumo;
-
-    @Column(name = "titulo")
-    private String titulo;
-
-    @Column(name = "url")
-    private String url;
-
-    @Column(name = "votos_negativos")
-    private Integer votosNegativos;
-
     @Column(name = "votos_positivos")
     private Integer votosPositivos;
 
-    @Column(name = "ativo")
-    private Integer ativo;
-
-    @Column(name = "tentativas")
-    private Integer tentativas;
+    @Column(name = "votos_negativos")
+    private Integer votosNegativos;
 
     @Column(name = "favoritos")
     private Integer favoritos;
@@ -61,7 +45,28 @@ public class BlogPost {
     @Column(name = "comentarios")
     private Integer comentarios;
 
+    @Column(name = "url")
+    private String url;
+
+    @ManyToOne
+    @JoinColumn(name = "site_id")
+    private Blog blog;
+
+    @Column(name = "version")
+    private Integer version;
+
+    @Column(name = "ativo")
+    private Integer ativo;
+
+    @Column(name = "tentativas")
+    private Integer tentativas;
+
     @Column(name = "thumbnail")
     private String thumbnail;
 
+    @Override
+    public int compareTo( BlogPost o) {
+        if(o.getDataPublicacao().isAfter(this.dataPublicacao)) return 1;
+        else return -1;
+    }
 }
