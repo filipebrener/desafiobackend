@@ -18,7 +18,7 @@ public class Autor {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;

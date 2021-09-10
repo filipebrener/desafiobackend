@@ -17,7 +17,7 @@ public class Blog {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "version")
     private Integer version;

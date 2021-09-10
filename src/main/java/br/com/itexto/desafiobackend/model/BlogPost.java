@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -16,7 +16,7 @@ public class BlogPost implements Comparable<BlogPost> {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "titulo")
     private String titulo;
@@ -28,10 +28,10 @@ public class BlogPost implements Comparable<BlogPost> {
     private Integer cliques;
 
     @Column(name = "data_inclusao")
-    private LocalDate dataInclusao;
+    private LocalDateTime dataInclusao;
 
     @Column(name = "data_publicacao")
-    private LocalDate dataPublicacao;
+    private LocalDateTime dataPublicacao;
 
     @Column(name = "votos_positivos")
     private Integer votosPositivos;
@@ -69,4 +69,5 @@ public class BlogPost implements Comparable<BlogPost> {
         if(o.getDataPublicacao().isAfter(this.dataPublicacao)) return 1;
         else return -1;
     }
+
 }
