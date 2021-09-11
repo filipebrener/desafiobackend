@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Data
 public class BlogPostResponse {
 
-
     private Long id;
     private String titulo;
     private String resumo;
@@ -18,7 +17,7 @@ public class BlogPostResponse {
     private Integer votosPositivos;
     private Integer votosNegativos;
     private Integer favoritos;
-    private BlogRs blog;
+    private BlogResponse blog;
     private Integer comentarios;
     private String url;
     private String thumbnail;
@@ -35,8 +34,21 @@ public class BlogPostResponse {
         this.favoritos = blogPost.getFavoritos();
         this.comentarios = blogPost.getComentarios();
         this.url = blogPost.getUrl();
-        this.blog = new BlogRs(blogPost.getBlog());
+        this.blog = new BlogResponse(blogPost.getBlog());
         this.thumbnail = blogPost.getThumbnail();
     }
+
+    // Este método ocuta a URL de um blog atribuindo null
+    public void ocultarURL(){
+        this.url = null;
+    }
+
+    // Este método irá atribuir o valor 0 aos atributos do tipo Integer que possuirem null.
+    // Este método ira alterar se necessario apenas os atributos: favoritos, comentários
+    public void nullToZero(){
+        if(this.favoritos == null) this.favoritos = 0;
+        if(this.comentarios == null) this.comentarios = 0;
+    }
+
 
 }

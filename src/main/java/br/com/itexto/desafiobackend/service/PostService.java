@@ -26,12 +26,19 @@ public class PostService {
         return blogPosts.stream()
                 .sorted()
                 .map(BlogPostResponse::new)
-                .peek(blogPostResponse -> blogPostResponse.setUrl(null))
+                .peek(BlogPostResponse::ocultarURL)
+                .peek(BlogPostResponse::nullToZero)
                 .collect(Collectors.toList());
     }
 
     public BlogPostResponse findBlogPostById(Long id){
         Optional<BlogPost> blogPost = blogPostRepository.findById(id);
-        return blogPost.map(BlogPostResponse::new).orElse(null);
+        if(blogPost.isPresent()) {
+            BlogPostResponse blogPostResponse = new BlogPostResponse(blogPost.get());
+            blogPostResponse.nullToZero();
+            return blogPostResponse;
+        } else {
+            return null;
+        }
     }
 }

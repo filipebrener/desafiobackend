@@ -15,10 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class PostController {
 
-    private PostService service;
+    private final PostService service;
 
     @GetMapping
-    public ResponseEntity<List<BlogPostResponse>> findByText(@RequestParam String search){
+    public ResponseEntity<List<BlogPostResponse>> findByText(@RequestParam(required = false) String search){
         List<BlogPostResponse> blogPostRS = service.findBlogPostLike(search);
         return ResponseEntity.status(HttpStatus.OK).body(blogPostRS);
     }

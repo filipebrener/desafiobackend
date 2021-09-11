@@ -4,12 +4,12 @@ import br.com.itexto.desafiobackend.model.Blog;
 import lombok.Data;
 
 @Data
-public class BlogRs {
+public class BlogResponse {
 
     private Long id;
     private String nome;
 
-    public BlogRs(Blog blog) {
+    public BlogResponse(Blog blog) {
         this.id = blog.getId();
         this.nome = blog.getNome();
     }
