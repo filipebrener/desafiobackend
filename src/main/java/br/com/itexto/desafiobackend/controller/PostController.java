@@ -1,6 +1,6 @@
 package br.com.itexto.desafiobackend.controller;
 
-import br.com.itexto.desafiobackend.controller.dto.BlogPostRs;
+import br.com.itexto.desafiobackend.controller.dto.BlogPostResponse;
 
 import br.com.itexto.desafiobackend.service.PostService;
 import lombok.AllArgsConstructor;
@@ -15,19 +15,19 @@ import java.util.List;
 @AllArgsConstructor
 public class PostController {
 
-    PostService service;
+    private PostService service;
 
     @GetMapping
-    public ResponseEntity<List<BlogPostRs>> findByText(@RequestParam String search){
-        List<BlogPostRs> blogPostRs = service.findBlogPostLike(search);
-        return ResponseEntity.status(HttpStatus.OK).body(blogPostRs);
+    public ResponseEntity<List<BlogPostResponse>> findByText(@RequestParam String search){
+        List<BlogPostResponse> blogPostRS = service.findBlogPostLike(search);
+        return ResponseEntity.status(HttpStatus.OK).body(blogPostRS);
     }
 
     @GetMapping({"/clique/{id}"})
-    public ResponseEntity<BlogPostRs> findById(@PathVariable Long id){
-        BlogPostRs blogPostRs = service.findBlogPostById(id);
-        if(blogPostRs == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        else return ResponseEntity.status(HttpStatus.OK).body(blogPostRs);
+    public ResponseEntity<BlogPostResponse> findById(@PathVariable Long id){
+        BlogPostResponse blogPostResponse = service.findBlogPostById(id);
+        if(blogPostResponse == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        else return ResponseEntity.status(HttpStatus.OK).body(blogPostResponse);
     }
 
 }

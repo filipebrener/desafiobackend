@@ -1,6 +1,6 @@
 package br.com.itexto.desafiobackend.service;
 
-import br.com.itexto.desafiobackend.controller.dto.BlogPostRs;
+import br.com.itexto.desafiobackend.controller.dto.BlogPostResponse;
 import br.com.itexto.desafiobackend.model.BlogPost;
 import br.com.itexto.desafiobackend.repository.BlogPostRepository;
 import lombok.AllArgsConstructor;
@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class PostService {
-    BlogPostRepository blogPostRepository;
 
-    public List<BlogPostRs> findBlogPostLike(String search) {
+    private final BlogPostRepository blogPostRepository;
+
+    public List<BlogPostResponse> findBlogPostLike(String search) {
         List<BlogPost> blogPosts;
         if(search == null) {
             blogPosts = blogPostRepository.findAll();
@@ -24,13 +25,13 @@ public class PostService {
         }
         return blogPosts.stream()
                 .sorted()
-                .map(BlogPostRs::converter)
-                .peek(blogPostRs -> blogPostRs.setUrl(null))
+                .map(BlogPostResponse::new)
+                .peek(blogPostResponse -> blogPostResponse.setUrl(null))
                 .collect(Collectors.toList());
     }
 
-    public BlogPostRs findBlogPostById(Long id){
+    public BlogPostResponse findBlogPostById(Long id){
         Optional<BlogPost> blogPost = blogPostRepository.findById(id);
-        return blogPost.map(BlogPostRs::converter).orElse(null);
+        return blogPost.map(BlogPostResponse::new).orElse(null);
     }
 }

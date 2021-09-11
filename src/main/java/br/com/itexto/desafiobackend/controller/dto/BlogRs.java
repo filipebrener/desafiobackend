@@ -9,10 +9,8 @@ public class BlogRs {
     private Long id;
     private String nome;
 
-    public static BlogRs converter(Blog blog) {
-        BlogRs blogRs = new BlogRs();
-        blogRs.setId(blog.getId());
-        blogRs.setNome(blog.getNome());
-        return blogRs;
+    public BlogRs(Blog blog) {
+        this.id = blog.getId();
+        this.nome = blog.getNome();
     }
 }
