@@ -24,10 +24,10 @@ public class PostService {
             blogPosts = blogPostRepository.findBlogPostsByTituloOrResumoContains(search,search);
         }
         return blogPosts.stream()
-                .sorted()
                 .map(BlogPostResponse::new)
                 .peek(BlogPostResponse::ocultarURL)
                 .peek(BlogPostResponse::nullToZero)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

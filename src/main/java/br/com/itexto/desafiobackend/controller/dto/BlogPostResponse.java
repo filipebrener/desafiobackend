@@ -2,11 +2,12 @@ package br.com.itexto.desafiobackend.controller.dto;
 
 import br.com.itexto.desafiobackend.model.BlogPost;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 
 @Data
-public class BlogPostResponse {
+public class BlogPostResponse implements Comparable<BlogPostResponse>{
 
     private Long id;
     private String titulo;
@@ -50,5 +51,9 @@ public class BlogPostResponse {
         if(this.comentarios == null) this.comentarios = 0;
     }
 
-
+    @Override
+    public int compareTo(@NotNull BlogPostResponse o) {
+        if(o.getDataInclusao().isAfter(this.dataInclusao)) return 1;
+        else return -1;
+    }
 }

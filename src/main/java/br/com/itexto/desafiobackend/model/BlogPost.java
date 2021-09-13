@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "blog_post")
-public class BlogPost implements Comparable<BlogPost> {
+public class BlogPost{
 
     @Id
     @Column(name = "id")
@@ -63,11 +63,5 @@ public class BlogPost implements Comparable<BlogPost> {
 
     @Column(name = "thumbnail")
     private String thumbnail;
-
-    @Override
-    public int compareTo( BlogPost o) {
-        if(o.getDataPublicacao().isAfter(this.dataPublicacao)) return 1;
-        else return -1;
-    }
 
 }

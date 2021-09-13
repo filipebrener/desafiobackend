@@ -19,8 +19,9 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<BlogPostResponse>> findByText(@RequestParam(required = false) String search){
-        List<BlogPostResponse> blogPostRS = service.findBlogPostLike(search);
-        return ResponseEntity.status(HttpStatus.OK).body(blogPostRS);
+        List<BlogPostResponse> blogPostResponse = service.findBlogPostLike(search);
+        if(blogPostResponse.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(blogPostResponse);
     }
 
     @GetMapping({"/clique/{id}"})
